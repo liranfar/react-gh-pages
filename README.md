@@ -137,6 +137,29 @@ The remainder of this document contains a tutorial on creating a React app (usin
     * I recommend exploring the GitHub repository once again at this point. When I did that, I noticed that a `master` branch now existed, and it contained the app's source code.
     * So, the `master` branch held the source code, and the `gh-pages` branch held the *built* app code.
 
+# React Router and Redux Integration
+
+* Make sure to cancel redux-dev-tools integration or use `composeWithDevTools`, for instance:
+
+    `const allStoreEnhancers = composeWithDevTools(applyMiddleware(dataService, routerMiddleware(history)), applyMiddleware(dataService, routerMiddleware(history))`
+
+* If you are using react-router-dom add `process.env.PUBLIC_URL` prefix to the link. example:
+`<Link to={process.env.PUBLIC_URL + '/'}> <li>Home</li></Link>`
+
+# <github_uname>.github.io support
+* To make react-router works properly make sure to add `/` at the end of "hompage" url in `package.json` : 
+
+    `"homepage": "https://liranfar.github.io/",`
+* After running `npm run deploy` copy `gh-pages` branch to `master`. I used the following commands: 
+    
+    ```
+    git clone...
+    git checkout gh-pages .
+    git add --all
+    git commit -m "* copy gh-pages to master working tree"
+    git push origin master
+    ```
+
 # References
 
 1. [Facebook's tutorial on deploying a React app to GitHub Pages](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#github-pages)
